@@ -1,0 +1,13 @@
+.form{
+    margin: 0 auto;
+    width: 600px;
+}
+.dnBtn{
+    text-align: center!important;
+}
+button{
+    width: 200px;
+}
+.password, .dnBtn{
+    margin-top: 15px;
+}
