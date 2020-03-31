@@ -1,10 +1,7 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import "./index.css";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
-import LoginForm from "./login/loginForm";
 var todoItems = [];
 todoItems.push({ index: 1, value: "learn React", done: false });
 todoItems.push({ index: 2, value: "Study Angular", done: true });

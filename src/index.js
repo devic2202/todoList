@@ -2,10 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import TodoList from "./TodoList";
-import TodoForm from "./TodoForm";
 import LoginForm from "./login/loginForm"
-import TodoApp from "./App"
 
 var todoItems = [];
 todoItems.push({ index: 1, value: "learn React", done: false });
