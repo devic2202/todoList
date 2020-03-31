@@ -1,5 +1,7 @@
 import React from "react";
 import "./login.css";
+import { useHistory, Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import TodoApp from "../App";
 export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -48,12 +50,18 @@ export default class LoginForm extends React.Component {
               />
             </div>
             <div className="dnBtn">
-              <button className="btn btn-success" type="submit" value="submit">
+              <button className="btn btn-success btnLogin" type="submit" value="submit">
                 Đăng nhập
               </button>
             </div>
           </div>
         </form>
+        <Router>
+          <Switch>
+            <Route path="/" exact Component={LoginForm} />
+            <Route path="/list" Component={TodoApp} />
+          </Switch>
+        </Router>
       </div>
     );
   }
@@ -69,10 +77,11 @@ export default class LoginForm extends React.Component {
     fetch("http://118.69.152.88:5001/api/auth/login", requestOptions)
       .then(async response => {
         const data = await response.json();
-
-        // check for error response
+        let history = useHistory();
+        if(data.status === 200){
+          history.push("/list");
+        }
         if (!response.ok) {
-          // get error message from body or default to response status
           const error = (data && data.message) || response.status;
           return Promise.reject(error);
         }
