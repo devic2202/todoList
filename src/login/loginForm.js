@@ -1,8 +1,9 @@
 import React from "react";
 import "./login.css";
-import { useHistory, Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import { useHistory, Switch, Route, BrowserRouter as Router, withRouter } from "react-router-dom";
 import TodoApp from "../App";
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -12,6 +13,7 @@ export default class LoginForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleChange(event) {
     const {name,value} = event.target
     this.setState({
@@ -65,7 +67,8 @@ export default class LoginForm extends React.Component {
       </div>
     );
   }
-  requestLogin = () => {
+  componentDidMount(){
+    const { history } = this.props;
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -77,7 +80,6 @@ export default class LoginForm extends React.Component {
     fetch("http://118.69.152.88:5001/api/auth/login", requestOptions)
       .then(async response => {
         const data = await response.json();
-        let history = useHistory();
         if(data.status === 200){
           history.push("/list");
         }
@@ -94,3 +96,4 @@ export default class LoginForm extends React.Component {
       });
   }
 }
+export default withRouter(LoginForm)
