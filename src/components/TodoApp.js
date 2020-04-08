@@ -1,10 +1,8 @@
 import React from "react";
-import "./index.css";
+import "../index.css";
 import TodoList from "./TodoList";
-import ReactDOM from "react-dom";
 import TodoForm from "./TodoForm";
 
-var todoItems = [];
 
 export default class TodoApp extends React.Component {
   constructor(props) {
@@ -27,7 +25,7 @@ export default class TodoApp extends React.Component {
     this.setState({ todoItems: this.props.initItems });
   }
   markTodoDone(itemIndex) {
-    var todo = this.props.initItems[itemIndex];
+    let todo = this.props.initItems[itemIndex];
     this.props.initItems.splice(itemIndex, 1);
     todo.done = !todo.done;
     todo.done ? this.props.initItems.push(todo) : this.props.initItems.unshift(todo);
@@ -53,7 +51,3 @@ export default class TodoApp extends React.Component {
     );
   }
 }
-ReactDOM.render(
-  <TodoApp initItems={todoItems} />,
-  document.getElementById("root")
-);

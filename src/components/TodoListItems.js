@@ -15,7 +15,7 @@ export default class TodoListItem extends React.Component {
     this.props.markTodoDone(index);
   }
   render() {
-    var todoClass = this.props.item.done ? "done" : "undone";
+    let todoClass = this.props.item.done ? "done" : "undone";
     return (
       <li className="list-group-item ">
         <div className={todoClass}>

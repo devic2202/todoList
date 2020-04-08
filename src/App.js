@@ -1,11 +1,14 @@
 import React from "react";
 import "./index.css";
-import { Switch, Route, BrowserRouter as Router, withRouter } from "react-router-dom";
+import {
+  Switch,
+  Route,
+  BrowserRouter as Router,
+} from "react-router-dom";
 import LoginForm from "./login/loginForm";
-import ReactDOM from "react-dom";
-import TodoApp from "./TodoApp";
+import TodoApp from "./components/TodoApp";
 
-var todoItems = [];
+let todoItems = [];
 todoItems.push({ index: 1, value: "learn React", done: false });
 todoItems.push({ index: 2, value: "Study Angular", done: true });
 todoItems.push({ index: 3, value: "Study Redux", done: true });
@@ -24,7 +27,3 @@ export default class App extends React.Component {
     );
   }
 }
-ReactDOM.render(
-  <LoginForm />,
-  document.getElementById("root")
-);
