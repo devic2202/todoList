@@ -1,6 +1,7 @@
 import React from "react";
-
-export default class TodoForm extends React.Component {
+import {addTodo} from "../state/actions";
+import {connect} from "react-redux";
+class TodoForm extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -12,7 +13,7 @@ export default class TodoForm extends React.Component {
     event.preventDefault();
     var newItem = this.refs.itemName.value;
     if (newItem) {
-      this.props.addItem({ newItem });
+      this.props.addTodo({ newItem });
       this.refs.form.reset();
     }
   }
@@ -33,3 +34,5 @@ export default class TodoForm extends React.Component {
     );
   }
 }
+
+export default connect(null, {addTodo})(TodoForm);

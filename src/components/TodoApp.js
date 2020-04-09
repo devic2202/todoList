@@ -2,9 +2,9 @@ import React from "react";
 import "../index.css";
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
+import { connect } from "react-redux";
 
-
-export default class TodoApp extends React.Component {
+class TodoApp extends React.Component {
   constructor(props) {
     super(props);
     this.addItem = this.addItem.bind(this);
@@ -37,7 +37,7 @@ export default class TodoApp extends React.Component {
         <div id="main" className="row">
           <h1>Todo List...</h1>
           <div className="col-md-6">
-            <TodoForm addItem={this.addItem} />
+            <TodoForm addItem={this.props.addTodo} />
           </div>
           <div className="col-md-6">
             <TodoList
@@ -51,3 +51,8 @@ export default class TodoApp extends React.Component {
     );
   }
 }
+const mapStateToProps = (state, ownprops) => {
+    return state.todos
+  };
+
+export default connect(mapStateToProps, null)(TodoApp);

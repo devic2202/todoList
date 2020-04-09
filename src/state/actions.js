@@ -1,7 +1,8 @@
 import * as types from "./types";
-export const addTodo = (value) => {
+export const addTodo = (index,value) => {
     return {
       type: types.ADD_TODO,
+      index,
       value,
       done: false
     }
