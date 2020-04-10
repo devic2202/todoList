@@ -4,10 +4,13 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-import reducer from "./state/reducer";
+import { createStore, compose, applyMiddleware } from "redux";
+import {rootReducer} from "./state";
+import {createLogger} from "redux-logger"
 
-const store = createStore(reducer);
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer,composeEnhancer(applyMiddleware(createLogger())));
 
 const app = (
   <Provider store={store}>

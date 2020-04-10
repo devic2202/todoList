@@ -6,19 +6,23 @@ import { connect } from "react-redux";
 
 class TodoApp extends React.Component {
   constructor(props) {
+    console.log(props)
     super(props);
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.markTodoDone = this.markTodoDone.bind(this);
-    this.state = { todoItems: props.initItems };
+    this.state = { todoItems: props.index };
+    console.log(this.state)
+
   }
   addItem(todoItem) {
-    this.props.initItems.unshift({
-      index: this.props.initItems.length + 1,
-      value: todoItem.newItem,
-      done: false
-    });
-    this.setState({ todoItems: this.props.initItems });
+    console.log(this.props);
+    // this.props.initItems.unshift({
+    //   index: this.props.initItems.length + 1,
+    //   value: todoItem.newItem,
+    //   done: false
+    // });
+    // this.setState({ todoItems: this.props.initItems });
   }
   removeItem(itemIndex) {
     this.props.initItems.splice(itemIndex, 1);
@@ -37,7 +41,7 @@ class TodoApp extends React.Component {
         <div id="main" className="row">
           <h1>Todo List...</h1>
           <div className="col-md-6">
-            <TodoForm addItem={this.props.addTodo} />
+            <TodoForm addItem={this.addItem} />
           </div>
           <div className="col-md-6">
             <TodoList
@@ -52,7 +56,7 @@ class TodoApp extends React.Component {
   }
 }
 const mapStateToProps = (state, ownprops) => {
-    return state.todos
+    return {todos : state.todos}
   };
 
 export default connect(mapStateToProps, null)(TodoApp);

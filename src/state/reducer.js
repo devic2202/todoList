@@ -12,8 +12,7 @@ const reducer = (state = initialState, action) => {
         todos: [
           ...state.todos,
           {
-              index: action.index.length + 1,
-              value: action.value,
+              index: action.index,
               done: false,
           }
         ]

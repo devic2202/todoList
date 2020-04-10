@@ -1,13 +1,11 @@
 import * as types from "./types";
-export const addTodo = (index,value) => {
+export const addTodo = (index) => {
     return {
       type: types.ADD_TODO,
       index,
-      value,
       done: false
     }
   };
-  
   
   export const removeTodo = (itemIndex) => {
     return {
@@ -15,6 +13,7 @@ export const addTodo = (index,value) => {
       itemIndex
     }
   };
+
   export const markdoneTodo = (itemIndex) => {
     return {
       type: types.MARKDONE_TODO,

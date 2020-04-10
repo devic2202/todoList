@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class TodoListItem extends React.Component {
+export default class TodoItems extends React.Component {
   constructor(props) {
     super(props);
     this.onClickClose = this.onClickClose.bind(this);
