@@ -1,16 +1,25 @@
-import TodoItems from './TodoItems'
-import React from 'react';
+import TodoItem from "./TodoItem";
+import React from "react";
+import {connect} from "react-redux";
 
-export default class TodoList extends React.Component {
-    render () {
-      console.log(this.props);
-      var items = this.props.items.map((item, index) => {
-        return (
-          <TodoItems key={index} item={item} index={index} removeItem={this.props.removeItem} markTodoDone={this.props.markTodoDone} />
-        );
-      });
+class TodoList extends React.Component {
+  render() {
+    let items = this.props.todos.todos.map((item, index) => {
       return (
-        <ul className="list-group"> {items} </ul>
+        <TodoItem
+          key={index}
+          item={item}
+          index={index}
+          removeItem={this.props.removeItem}
+          markTodoDone={this.props.markTodoDone}
+        />
       );
-    }
+    });
+    return <ul className="list-group"> {items} </ul>;
   }
+}
+
+const mapStateToProps = (state, ownprops) => {
+  return { todos: state.todos };
+};
+export default connect(mapStateToProps, null)(TodoList);

@@ -6,23 +6,10 @@ import { connect } from "react-redux";
 
 class TodoApp extends React.Component {
   constructor(props) {
-    console.log(props)
     super(props);
-    this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.markTodoDone = this.markTodoDone.bind(this);
     this.state = { todoItems: props.index };
-    console.log(this.state)
-
-  }
-  addItem(todoItem) {
-    console.log(this.props);
-    // this.props.initItems.unshift({
-    //   index: this.props.initItems.length + 1,
-    //   value: todoItem.newItem,
-    //   done: false
-    // });
-    // this.setState({ todoItems: this.props.initItems });
   }
   removeItem(itemIndex) {
     this.props.initItems.splice(itemIndex, 1);
@@ -32,7 +19,9 @@ class TodoApp extends React.Component {
     let todo = this.props.initItems[itemIndex];
     this.props.initItems.splice(itemIndex, 1);
     todo.done = !todo.done;
-    todo.done ? this.props.initItems.push(todo) : this.props.initItems.unshift(todo);
+    todo.done
+      ? this.props.initItems.push(todo)
+      : this.props.initItems.unshift(todo);
     this.setState({ todoItems: this.props.initItems });
   }
   render() {
@@ -41,22 +30,23 @@ class TodoApp extends React.Component {
         <div id="main" className="row">
           <h1>Todo List...</h1>
           <div className="col-md-6">
-            <TodoForm addItem={this.addItem} />
+            <TodoForm />
           </div>
           <div className="col-md-6">
             <TodoList
-              items={this.props.initItems}
-              removeItem={this.removeItem}
               markTodoDone={this.markTodoDone}
             />
+            <div>
+            </div>
           </div>
         </div>
       </div>
     );
   }
 }
+
 const mapStateToProps = (state, ownprops) => {
-    return {todos : state.todos}
-  };
+  return { todos: state.todos };
+};
 
 export default connect(mapStateToProps, null)(TodoApp);

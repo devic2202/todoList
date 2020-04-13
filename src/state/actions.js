@@ -1,22 +1,23 @@
 import * as types from "./types";
-export const addTodo = (index) => {
+export const addTodo = (item) => {
     return {
       type: types.ADD_TODO,
-      index,
-      done: false
+      item,
+      done : false,
     }
   };
   
   export const removeTodo = (itemIndex) => {
     return {
       type: types.REMOVE_TODO,
-      itemIndex
+      itemIndex,
     }
   };
 
   export const markdoneTodo = (itemIndex) => {
     return {
       type: types.MARKDONE_TODO,
-      itemIndex
+      itemIndex,
+      done : true,
     }
   };

@@ -12,14 +12,15 @@ const reducer = (state = initialState, action) => {
         todos: [
           ...state.todos,
           {
-              index: action.index,
-              done: false,
-          }
-        ]
+            index: state.itemIndex + 1,
+            value: action.item,
+            done: false,
+          },
+        ],
+        itemIndex: state.itemIndex + 1,
       };
     case types.REMOVE_TODO:
-      TodoApp.removeItem(state.itemIndex);
-      return;
+      return state.filter((todo) => todo.index !== action.index);
     case types.MARKDONE_TODO:
       TodoApp.markTodoDone(state.itemIndex);
       return;

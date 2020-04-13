@@ -11,9 +11,9 @@ class TodoForm extends React.Component {
   }
   onSubmit(event) {
     event.preventDefault();
-    var newItem = this.refs.itemName.value;
+    let newItem = this.refs.itemName.value;
     if (newItem) {
-      this.props.addTodo({ newItem });
+      this.props.addTodo(newItem);
       this.refs.form.reset();
     }
   }

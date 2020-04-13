@@ -1,6 +1,8 @@
 import React from "react";
+import {removeTodo} from "../state/actions";
+import {connect} from "react-redux";
 
-export default class TodoItems extends React.Component {
+class TodoItem extends React.Component {
   constructor(props) {
     super(props);
     this.onClickClose = this.onClickClose.bind(this);
@@ -8,7 +10,7 @@ export default class TodoItems extends React.Component {
   }
   onClickClose() {
     var index = parseInt(this.props.index);
-    this.props.removeItem(index);
+    this.props.removeTodo(index);
   }
   onClickDone() {
     var index = parseInt(this.props.index);
@@ -33,3 +35,4 @@ export default class TodoItems extends React.Component {
     );
   }
 }
+export default connect(null, {removeTodo})(TodoItem);
