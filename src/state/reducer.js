@@ -1,5 +1,4 @@
 import * as types from "./types";
-import TodoApp from "../components/TodoApp";
 const initialState = {
   todos: [],
   itemIndex: 0,
@@ -20,10 +19,17 @@ const reducer = (state = initialState, action) => {
         itemIndex: state.itemIndex + 1,
       };
     case types.REMOVE_TODO:
-      return state.filter((todo) => todo.index !== action.index);
+      return {
+        todos: state.todos.filter(todo => todo.index !== action.index),
+      };
     case types.MARKDONE_TODO:
-      TodoApp.markTodoDone(state.itemIndex);
-      return;
+      return {
+        todos: state.todos.map(todo =>
+          (todo.index === action.index)
+            ?{...todo,done: !todo.done}
+            : todo 
+        ),
+      };
     default:
       return state;
   }

@@ -4,26 +4,7 @@ import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
 import { connect } from "react-redux";
 
-class TodoApp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.removeItem = this.removeItem.bind(this);
-    this.markTodoDone = this.markTodoDone.bind(this);
-    this.state = { todoItems: props.index };
-  }
-  removeItem(itemIndex) {
-    this.props.initItems.splice(itemIndex, 1);
-    this.setState({ todoItems: this.props.initItems });
-  }
-  markTodoDone(itemIndex) {
-    let todo = this.props.initItems[itemIndex];
-    this.props.initItems.splice(itemIndex, 1);
-    todo.done = !todo.done;
-    todo.done
-      ? this.props.initItems.push(todo)
-      : this.props.initItems.unshift(todo);
-    this.setState({ todoItems: this.props.initItems });
-  }
+export default class TodoApp extends React.Component {
   render() {
     return (
       <div className="container">
@@ -34,7 +15,6 @@ class TodoApp extends React.Component {
           </div>
           <div className="col-md-6">
             <TodoList
-              markTodoDone={this.markTodoDone}
             />
             <div>
             </div>
@@ -44,9 +24,3 @@ class TodoApp extends React.Component {
     );
   }
 }
-
-const mapStateToProps = (state, ownprops) => {
-  return { todos: state.todos };
-};
-
-export default connect(mapStateToProps, null)(TodoApp);

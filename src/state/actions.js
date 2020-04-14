@@ -7,17 +7,17 @@ export const addTodo = (item) => {
     }
   };
   
-  export const removeTodo = (itemIndex) => {
+  export const removeTodo = (index) => {
     return {
       type: types.REMOVE_TODO,
-      itemIndex,
+      index,
     }
   };
 
-  export const markdoneTodo = (itemIndex) => {
+  export const markTodoDone = (index) => {
     return {
       type: types.MARKDONE_TODO,
-      itemIndex,
+      index,
       done : true,
     }
   };

@@ -1,5 +1,5 @@
 import React from "react";
-import {removeTodo} from "../state/actions";
+import {removeTodo, markTodoDone} from "../state/actions";
 import {connect} from "react-redux";
 
 class TodoItem extends React.Component {
@@ -9,12 +9,13 @@ class TodoItem extends React.Component {
     this.onClickDone = this.onClickDone.bind(this);
   }
   onClickClose() {
-    var index = parseInt(this.props.index);
+    let index = parseInt(this.props.item.index);
     this.props.removeTodo(index);
   }
   onClickDone() {
-    var index = parseInt(this.props.index);
-    this.props.markTodoDone(index);
+    let index = parseInt(this.props.item.index);
+    let done = this.props.item.done;
+    this.props.markTodoDone(index,done);
   }
   render() {
     let todoClass = this.props.item.done ? "done" : "undone";
@@ -35,4 +36,4 @@ class TodoItem extends React.Component {
     );
   }
 }
-export default connect(null, {removeTodo})(TodoItem);
+export default connect(null, {removeTodo, markTodoDone})(TodoItem);
