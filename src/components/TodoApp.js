@@ -2,7 +2,6 @@ import React from "react";
 import "../index.css";
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
-import { connect } from "react-redux";
 
 export default class TodoApp extends React.Component {
   render() {
