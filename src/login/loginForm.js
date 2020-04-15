@@ -2,7 +2,7 @@ import React from "react";
 import "./login.css";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
-class LoginForm extends React.Component {
+class LoginForm extends React.PureComponent {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -37,6 +37,7 @@ class LoginForm extends React.Component {
             if (data) {
               if (data.status === 200) {
                     history.push("/list");
+                    localStorage.setItem("token", data.data.doc.token);
               }
               if (data.status === 401) {
                 alert("username or password incorrect");

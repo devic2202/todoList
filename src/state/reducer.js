@@ -1,7 +1,7 @@
 import * as types from "./types";
 const initialState = {
   todos: [],
-  itemIndex: 0,
+  index: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,24 +11,23 @@ const reducer = (state = initialState, action) => {
         todos: [
           ...state.todos,
           {
-            index: state.itemIndex + 1,
+            index: state.index + 1,
             value: action.item,
             done: false,
           },
         ],
-        itemIndex: state.itemIndex + 1,
+        index: state.index + 1,
       };
     case types.REMOVE_TODO:
-      return {
-        todos: state.todos.filter(todo => todo.index !== action.index),
-      };
+      const newTodo = [...state.todos];
+      newTodo.splice(action.index, 1);
+      return { todos: newTodo, index: state.index };
     case types.MARKDONE_TODO:
       return {
-        todos: state.todos.map(todo =>
-          (todo.index === action.index)
-            ?{...todo,done: !todo.done}
-            : todo 
+        todos: state.todos.map((todo) =>
+          todo.index === action.index ? { ...todo, done: !todo.done } : todo
         ),
+        index: state.index,
       };
     default:
       return state;

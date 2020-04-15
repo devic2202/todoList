@@ -2,18 +2,18 @@ import React from "react";
 import {removeTodo, markTodoDone} from "../state/actions";
 import {connect} from "react-redux";
 
-class TodoItem extends React.Component {
+class TodoItem extends React.PureComponent {
   constructor(props) {
     super(props);
     this.onClickClose = this.onClickClose.bind(this);
     this.onClickDone = this.onClickDone.bind(this);
   }
   onClickClose() {
-    let index = parseInt(this.props.item.index);
+    const index = parseInt(this.props.index);
     this.props.removeTodo(index);
   }
   onClickDone() {
-    let index = parseInt(this.props.item.index);
+    const index = parseInt(this.props.item.index);
     let done = this.props.item.done;
     this.props.markTodoDone(index,done);
   }

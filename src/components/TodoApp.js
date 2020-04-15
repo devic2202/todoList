@@ -3,7 +3,7 @@ import "../index.css";
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
 
-export default class TodoApp extends React.Component {
+export default class TodoApp extends React.PureComponent {
   render() {
     return (
       <div className="container">

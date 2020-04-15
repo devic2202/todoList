@@ -8,7 +8,7 @@ import {
 import LoginForm from "./login/loginForm";
 import TodoApp from "./components/TodoApp";
 
-export default class App extends React.Component {
+export default class App extends React.PureComponent {
   render() {
     return (
       <div className="container">

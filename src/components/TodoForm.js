@@ -1,7 +1,7 @@
 import React from "react";
 import {addTodo} from "../state/actions";
 import {connect} from "react-redux";
-class TodoForm extends React.Component {
+class TodoForm extends React.PureComponent {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
