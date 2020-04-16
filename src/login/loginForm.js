@@ -37,7 +37,7 @@ class LoginForm extends React.PureComponent {
             if (data) {
               if (data.status === 200) {
                     history.push("/list");
-                    localStorage.setItem("token", data.data.doc.token);
+                    localStorage.setItem("user", JSON.stringify(data));
               }
               if (data.status === 401) {
                 alert("username or password incorrect");
@@ -46,7 +46,7 @@ class LoginForm extends React.PureComponent {
             if (this.isComponentMounted) {
               this.setState({
                 username: this.props.values.username,
-                password: this.props.values.password,
+                password: this.props.values.password, 
               });
             }
           } catch (error) {
