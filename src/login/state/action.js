@@ -1,5 +1,5 @@
 import * as types from "./types";
-export const addTodo = (data = {}) => {
+export const logIn = (data = {}) => {
     return {
       type: types.LOG_IN,
       data,

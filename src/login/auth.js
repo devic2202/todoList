@@ -18,13 +18,12 @@ export default function withAuth(ComponentToProtect) {
         ) {
           const { history } = this.props;
           this.setState({ loading: false });
-          history.push("/list");
         } else {
           const error = new Error(token.error);
           throw error;
         }
       } catch (error) {
-        console.error(error);
+        alert('Vui lòng đăng nhập');
         this.setState({ loading: false, redirect: true });
       }
     }

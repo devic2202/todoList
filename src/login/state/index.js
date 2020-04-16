@@ -1,4 +1,4 @@
 import {combineReducers} from 'redux';
 import reducer from './reducer';
 
-export const rootReducer = combineReducers({todos: reducer});
+export const rootReducer = combineReducers({data: reducer});

@@ -36,8 +36,8 @@ class LoginForm extends React.PureComponent {
           try {
             if (data) {
               if (data.status === 200) {
-                    history.push("/list");
-                    localStorage.setItem("user", JSON.stringify(data));
+                localStorage.setItem("user", JSON.stringify(data));
+                history.push("/list");
               }
               if (data.status === 401) {
                 alert("username or password incorrect");
