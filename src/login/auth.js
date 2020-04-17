@@ -16,14 +16,14 @@ export default function withAuth(ComponentToProtect) {
           token.data.doc.token !== undefined ||
           token.data.doc.token !== null
         ) {
-          const { history } = this.props;
           this.setState({ loading: false });
         } else {
           const error = new Error(token.error);
           throw error;
         }
       } catch (error) {
-        alert('Vui lòng đăng nhập');
+        console.log(error);
+        alert("Vui lòng đăng nhập");
         this.setState({ loading: false, redirect: true });
       }
     }

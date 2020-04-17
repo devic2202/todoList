@@ -1,7 +1,10 @@
 import React from "react";
 import "./login.css";
 import { withFormik, Form, Field } from "formik";
+import { connect } from "react-redux";
 import * as Yup from "yup";
+import { userLogin } from "./state/actions";
+import { push } from "react-router-redux";
 class LoginForm extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -16,53 +19,56 @@ class LoginForm extends React.PureComponent {
   }
 
   handleSubmit(event) {
-    this.requestLogin();
+    // this.requestLogin();
     event.preventDefault();
+    this.props.userLogin(this.props.values);
+    const { history } = this.props;
+    history.push("/list");
   }
-  requestLogin() {
-    try {
-      const { history } = this.props;
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: this.props.values.username,
-          password: this.props.values.password,
-        }),
-      };
-      fetch("http://118.69.152.88:5001/api/auth/login", requestOptions).then(
-        async (response) => {
-          const data = await response.json();
-          try {
-            if (data) {
-              if (data.status === 200) {
-                localStorage.setItem("user", JSON.stringify(data));
-                history.push("/list");
-              }
-              if (data.status === 401) {
-                alert("username or password incorrect");
-              }
-            }
-            if (this.isComponentMounted) {
-              this.setState({
-                username: this.props.values.username,
-                password: this.props.values.password, 
-              });
-            }
-          } catch (error) {
-            console.log(error);
-            if (!response.ok) {
-              const error = (data && data.message) || response.status;
-              return Promise.reject(error);
-            }
-          }
-        }
-      );
-    } catch (error) {
-      this.setState({ errorMessage: error });
-      console.error("There was an error!", error);
-    }
-  }
+  // requestLogin() {
+  //   try {
+  //     const { history } = this.props;
+  //     const requestOptions = {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         username: this.props.values.username,
+  //         password: this.props.values.password,
+  //       }),
+  //     };
+  //     fetch("http://118.69.152.88:5001/api/auth/login", requestOptions).then(
+  //       async (response) => {
+  //         const data = await response.json();
+  //         try {
+  //           if (data) {
+  //             if (data.status === 200) {
+  //               localStorage.setItem("user", JSON.stringify(data));
+  //               history.push("/list");
+  //             }
+  //             if (data.status === 401) {
+  //               alert("username or password incorrect");
+  //             }
+  //           }
+  //           if (this.isComponentMounted) {
+  //             this.setState({
+  //               username: this.props.values.username,
+  //               password: this.props.values.password,
+  //             });
+  //           }
+  //         } catch (error) {
+  //           console.log(error);
+  //           if (!response.ok) {
+  //             const error = (data && data.message) || response.status;
+  //             return Promise.reject(error);
+  //           }
+  //         }
+  //       }
+  //     );
+  //   } catch (error) {
+  //     this.setState({ errorMessage: error });
+  //     console.error("There was an error!", error);
+  //   }
+  // }
 
   render() {
     return (
@@ -74,6 +80,7 @@ class LoginForm extends React.PureComponent {
               <p>Tên đăng nhập</p>
               <Field
                 name="username"
+                value={this.props.values.username}
                 render={({ field }) => (
                   <input
                     type="text"
@@ -91,6 +98,7 @@ class LoginForm extends React.PureComponent {
               <p>Mật khẩu</p>
               <Field
                 name="password"
+                value={this.props.values.password}
                 render={({ field }) => (
                   <input
                     type="password"
@@ -138,4 +146,10 @@ const FormikForm = withFormik({
   }),
 })(LoginForm);
 
-export default FormikForm;
+const mapDispatchToProps = (dispatch) => ({
+  userLogin: (userInfo) => {
+    dispatch(userLogin(userInfo));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(FormikForm);

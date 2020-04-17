@@ -1,12 +1,16 @@
 import * as types from "./types";
 const initialState = {
-  data: {},
+    user: {},
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOG_IN:
-      return ;
+        localStorage.setItem("user", JSON.stringify(data));
+        
+        return {...state, user: action
+        }
+        
     case types.LOG_OUT:
       
       return ;
@@ -16,5 +20,5 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
-
+ 
 export default reducer;

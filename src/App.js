@@ -9,6 +9,7 @@ import LoginForm from "./login/loginForm";
 import TodoApp from "./components/TodoApp";
 import withAuth from "./login/auth";
 export default class App extends React.PureComponent {
+  
   render() {
     return (
       <div className="container">
