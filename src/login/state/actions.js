@@ -9,10 +9,9 @@ export const userLogin = (user) => {
     return fetch("http://118.69.152.88:5001/api/auth/login", requestOptions)
       .then((resp) => resp.json())
       .then((data) => {
-        if (data.status === 401) {
-          alert('Vui lòng thử lại');
+        if (data.errorCode === "USER_PASS_INVALID") {
+          alert('Mật khẩu không chính xác');
         } else {
-          localStorage.setItem("user", JSON.stringify(data));
           dispatch(loginUser(data));
         }
       });
@@ -20,7 +19,7 @@ export const userLogin = (user) => {
 };
 
 const loginUser = (data = {}) => ({
-  type: "LOGIN_USER",
+  type: types.LOG_IN,
   data,
 });
 

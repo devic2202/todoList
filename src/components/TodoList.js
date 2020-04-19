@@ -18,6 +18,6 @@ class TodoList extends React.PureComponent {
 }
 
 const mapStateToProps = (state, ownprops) => {
-  return { todos: state.todos };
+  return { todos: state.todoList };
 };
 export default connect(mapStateToProps, null)(TodoList);

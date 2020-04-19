@@ -4,12 +4,10 @@ import { withFormik, Form, Field } from "formik";
 import { connect } from "react-redux";
 import * as Yup from "yup";
 import { userLogin } from "./state/actions";
-import { push } from "react-router-redux";
 class LoginForm extends React.PureComponent {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
     const { name, value } = event.target;
@@ -17,63 +15,11 @@ class LoginForm extends React.PureComponent {
       [name]: value,
     });
   }
-
-  handleSubmit(event) {
-    // this.requestLogin();
-    event.preventDefault();
-    this.props.userLogin(this.props.values);
-    const { history } = this.props;
-    history.push("/list");
-  }
-  // requestLogin() {
-  //   try {
-  //     const { history } = this.props;
-  //     const requestOptions = {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         username: this.props.values.username,
-  //         password: this.props.values.password,
-  //       }),
-  //     };
-  //     fetch("http://118.69.152.88:5001/api/auth/login", requestOptions).then(
-  //       async (response) => {
-  //         const data = await response.json();
-  //         try {
-  //           if (data) {
-  //             if (data.status === 200) {
-  //               localStorage.setItem("user", JSON.stringify(data));
-  //               history.push("/list");
-  //             }
-  //             if (data.status === 401) {
-  //               alert("username or password incorrect");
-  //             }
-  //           }
-  //           if (this.isComponentMounted) {
-  //             this.setState({
-  //               username: this.props.values.username,
-  //               password: this.props.values.password,
-  //             });
-  //           }
-  //         } catch (error) {
-  //           console.log(error);
-  //           if (!response.ok) {
-  //             const error = (data && data.message) || response.status;
-  //             return Promise.reject(error);
-  //           }
-  //         }
-  //       }
-  //     );
-  //   } catch (error) {
-  //     this.setState({ errorMessage: error });
-  //     console.error("There was an error!", error);
-  //   }
-  // }
-
   render() {
+    const { handleSubmit } = this.props;
     return (
       <div className="container">
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <div className="form">
             <h1>Đăng nhập vào Todo Lists</h1>
             <div className="account">
@@ -144,12 +90,17 @@ const FormikForm = withFormik({
       .max(10, "Username have max 10 characters"),
     password: Yup.string().required("Password is required"),
   }),
+  handleSubmit: async (values, { props }) => {
+    const { history } = props;
+    props.userLogin(values);
+    if(props.user.isAuthenticated === true){
+      history.push("/list");
+    }
+  },
 })(LoginForm);
 
-const mapDispatchToProps = (dispatch) => ({
-  userLogin: (userInfo) => {
-    dispatch(userLogin(userInfo));
-  },
-});
+const mapStateToProps = (state, ownprops) => {
+  return { user: state.logIn };
+};
 
-export default connect(null, mapDispatchToProps)(FormikForm);
+export default connect(mapStateToProps, {userLogin})(FormikForm);

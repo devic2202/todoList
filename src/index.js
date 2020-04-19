@@ -5,13 +5,13 @@ import * as serviceWorker from "./serviceWorker";
 import thunk from 'redux-thunk';
 import App from "./App";
 import { Provider } from "react-redux";
-import { createStore, compose, applyMiddleware } from "redux";
-import {rootReducer} from "./state";
+import { createStore, compose, applyMiddleware, combineReducers } from "redux";
+import * as rootReducer from "./store";
 import {createLogger} from "redux-logger"
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(rootReducer,composeEnhancer(applyMiddleware(createLogger(),thunk)));
+const rootReducers = combineReducers(rootReducer)
+const store = createStore(rootReducers,composeEnhancer(applyMiddleware(createLogger(),thunk)));
 
 const app = (
   <Provider store={store}>

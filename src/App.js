@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import LoginForm from "./login/loginForm";
 import TodoApp from "./components/TodoApp";
-import withAuth from "./login/auth";
 export default class App extends React.PureComponent {
   
   render() {
@@ -16,7 +15,7 @@ export default class App extends React.PureComponent {
         <Router>
           <Switch>
             <Route path="/" exact component={LoginForm} />
-            <Route path="/list" exact component={withAuth(TodoApp)} />
+            <Route path="/list" exact component={TodoApp} />
           </Switch>
         </Router>
       </div>
