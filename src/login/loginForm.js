@@ -1,10 +1,10 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import "./login.css";
 import { withFormik, Form, Field } from "formik";
 import { connect } from "react-redux";
 import * as Yup from "yup";
-import { userLogin } from "./state/actions";
-class LoginForm extends React.PureComponent {
+import { userLogin } from "../state/loginState/actions";
+class LoginForm extends PureComponent {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);

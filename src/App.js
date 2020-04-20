@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import { connect } from 'react-redux';
 import "./index.css";
 import {
@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import LoginForm from "./login/loginForm";
 import TodoApp from "./components/TodoApp";
-class App extends React.PureComponent {
+class App extends PureComponent {
   
   render() {
     let user = JSON.parse(localStorage.getItem("user"));

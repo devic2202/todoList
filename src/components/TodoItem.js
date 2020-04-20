@@ -1,8 +1,8 @@
-import React from "react";
-import {removeTodo, markTodoDone} from "../state/actions";
+import React, {PureComponent} from "react";
+import {removeTodo, markTodoDone} from "../state/todoState/actions";
 import {connect} from "react-redux";
 
-class TodoItem extends React.PureComponent {
+class TodoItem extends PureComponent {
   constructor(props) {
     super(props);
     this.onClickClose = this.onClickClose.bind(this);

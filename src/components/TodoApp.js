@@ -1,11 +1,10 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import "../index.css";
 import TodoList from "./TodoList";
 import TodoForm from "./TodoForm";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import {logOut} from "../login/state/actions";
-class TodoApp extends React.PureComponent {
+import {logOut} from "../state/loginState/actions";
+class TodoApp extends PureComponent {
   constructor(props) {
     super(props);
     this.logOutUser = this.logOutUser.bind(this);
@@ -17,7 +16,6 @@ class TodoApp extends React.PureComponent {
   
   logOutUser(){
     this.props.logOut();
-    Redirect("/");
   }
   render() {
     return (

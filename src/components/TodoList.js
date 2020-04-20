@@ -1,8 +1,8 @@
 import TodoItem from "./TodoItem";
-import React from "react";
+import React, {PureComponent} from "react";
 import {connect} from "react-redux";
 
-class TodoList extends React.PureComponent {
+class TodoList extends PureComponent {
   render() {
     let items = this.props.todos.todos.map((item, index) => {
       return (

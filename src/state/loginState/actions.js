@@ -6,7 +6,8 @@ export const userLogin = (user) => {
     body: JSON.stringify(user),
   };
   return (dispatch) => {
-    return fetch("http://118.69.152.88:5001/api/auth/login", requestOptions)
+    try {
+      return fetch("http://118.69.152.88:5001/api/auth/login", requestOptions)
       .then((resp) => resp.json())
       .then((data) => {
         if (data.errorCode === "USER_PASS_INVALID") {
@@ -16,6 +17,10 @@ export const userLogin = (user) => {
           dispatch(loginUser(data));
         }
       });
+    } catch (error) {
+      dispatch(loginUser(error));
+    }
+    
   };
 };
 
