@@ -91,11 +91,14 @@ const FormikForm = withFormik({
     password: Yup.string().required("Password is required"),
   }),
   handleSubmit: async (values, { props }) => {
-    const { history } = props;
-    props.userLogin(values);
-    if(props.user.isAuthenticated === true){
-      history.push("/list");
-    }
+    const { history, userLogin } = props;
+    userLogin(values).then((res) => {
+        history.push("/list");
+    })
+    .catch((err) => {
+      console.log(err);
+
+    })
   },
 })(LoginForm);
 

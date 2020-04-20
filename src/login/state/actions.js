@@ -10,7 +10,8 @@ export const userLogin = (user) => {
       .then((resp) => resp.json())
       .then((data) => {
         if (data.errorCode === "USER_PASS_INVALID") {
-          alert('Mật khẩu không chính xác');
+          alert("Mật khẩu không chính xác");
+          dispatch(loginUser(data));
         } else {
           dispatch(loginUser(data));
         }
@@ -30,9 +31,3 @@ export const logOut = (data = {}) => {
   };
 };
 
-export const getUser = (data = {}) => {
-  return {
-    type: types.GET_USER,
-    data,
-  };
-};
